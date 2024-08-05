@@ -28,7 +28,9 @@ export const userById = async (req, res, next, id) => {
   }
 };
 export const read = (req, res) => {
-  
+  req.profile.hashedPassword = undefined;
+  req.profile.salt = undefined;
+  res.json(req.profile);
 };
 export const update = (req, res, next) => {};
 export const remove = (req, res, next) => {};
