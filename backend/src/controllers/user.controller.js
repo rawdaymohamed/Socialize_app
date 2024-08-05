@@ -21,10 +21,10 @@ export const list = async (req, res) => {
 export const userById = async (req, res, next, id) => {
   try {
     let user = await User.findById(id);
-    if (!user) return res.json({ error: "User not found" });
+    if (!user) return res.status(400).json({ error: "User not found" });
     req.profile = user;
   } catch (err) {
-    return res.json({ error: "Couldn't retrieve user" });
+    return res.status(400).json({ error: "Couldn't retrieve user" });
   }
 };
 export const read = (req, res) => {
@@ -32,5 +32,17 @@ export const read = (req, res) => {
   req.profile.salt = undefined;
   res.json(req.profile);
 };
-export const update = (req, res, next) => {};
+export const update = async (req, res, next) => {
+  try {
+    let user = req.profile;
+    user = extend(user, req.body);
+    user.updated = Date.now();
+    await user.save();
+    user.hashedPassword = undefined;
+    user.salt = undefined;
+    return res.json(user);
+  } catch (err) {
+    return res.status(400).json({ error: getErrorMessage(err) });
+  }
+};
 export const remove = (req, res, next) => {};
