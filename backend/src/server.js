@@ -6,6 +6,7 @@ import helmet from "helmet";
 import { connectToDB } from "./connect_to_db.js";
 import config from "./config/config.js";
 import userRoutes from "./routes/user.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 
 const app = express();
 
@@ -18,4 +19,5 @@ const PORT = config.port;
 connectToDB();
 app.get("/", (req, res) => res.json({ message: "Hello from backend" }));
 app.use("/", userRoutes);
+app.use("/", authRoutes);
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
