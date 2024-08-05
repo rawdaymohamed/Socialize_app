@@ -18,7 +18,17 @@ export const list = async (req, res) => {
     return res.status(400).json({ error: getErrorMessage(err) });
   }
 };
-export const userById = (req, res, next, id) => {};
-export const read = (req, res) => {};
+export const userById = async (req, res, next, id) => {
+  try {
+    let user = await User.findById(id);
+    if (!user) return res.json({ error: "User not found" });
+    req.profile = user;
+  } catch (err) {
+    return res.json({ error: "Couldn't retrieve user" });
+  }
+};
+export const read = (req, res) => {
+  
+};
 export const update = (req, res, next) => {};
 export const remove = (req, res, next) => {};
