@@ -45,4 +45,14 @@ export const update = async (req, res, next) => {
     return res.status(400).json({ error: getErrorMessage(err) });
   }
 };
-export const remove = (req, res, next) => {};
+export const remove = async (req, res, next) => {
+  try {
+    let user = req.profile;
+    let removedUser = await User.findByIdAndDelete(user._id);
+    removedUser.hashedPassword = undefined;
+    removedUser.salt = undefined;
+    return res.json(removedUser);
+  } catch (err) {
+    return res.status(400).json({ error: getErrorMessage(err) });
+  }
+};
