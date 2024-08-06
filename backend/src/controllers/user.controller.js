@@ -2,8 +2,9 @@ import User from "../models/user.model.js";
 import extend from "lodash/extend.js";
 import { getErrorMessage } from "../helpers/dbErrorHandler.js";
 export const create = async (req, res) => {
-  const user = new User(req.body);
   try {
+    const user = new User(req.body);
+
     await user.save();
     return res.json({ message: "Successfully signed up!" });
   } catch (err) {
