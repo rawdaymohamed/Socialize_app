@@ -21,3 +21,15 @@ app.get("/", (req, res) => res.json({ message: "Hello from backend" }));
 app.use("/", userRoutes);
 app.use("/", authRoutes);
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// authorization middleware
+app.use((err, req, res, next) => {
+  if (err.name === "UnauthorizedError")
+    res.status(401).json({ error: err.name + ": " + err.message });
+  else if (err) {
+    res.status(400).json({ error: err.name + ": " + err.message });
+    console.log(err);
+  }
+
+  next();
+});

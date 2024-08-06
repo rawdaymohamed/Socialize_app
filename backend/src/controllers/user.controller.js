@@ -24,6 +24,8 @@ export const userById = async (req, res, next, id) => {
     let user = await User.findById(id);
     if (!user) return res.status(400).json({ error: "User not found" });
     req.profile = user;
+
+    next();
   } catch (err) {
     return res.status(400).json({ error: "Couldn't retrieve user" });
   }
