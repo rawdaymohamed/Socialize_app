@@ -18,6 +18,9 @@ export const login = async (req, res) => {
     return res.status(401).json({ error: "Couldn't login user" });
   }
 };
-export const logout = (req, res) => {};
+export const logout = (req, res) => {
+  res.clearCookie("t");
+  return res.json({ message: "Logged out" });
+};
 export const requireLogin = (req, res, next) => {};
 export const hasAuthorization = (req, res, next) => {};
