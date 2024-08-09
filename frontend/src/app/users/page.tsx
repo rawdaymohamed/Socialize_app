@@ -1,3 +1,5 @@
+import PrivateRoute from "../privateRoute";
+
 export default function Page() {
-    return <>All Users</>
+    return <PrivateRoute><>All users</></PrivateRoute>
 }
