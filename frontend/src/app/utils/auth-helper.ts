@@ -4,6 +4,7 @@ export default {
   authenticate(jwt: any, cb: Function) {
     if (typeof window !== "undefined")
       localStorage.setItem("jwt", JSON.stringify(jwt));
+    console.log(localStorage.getItem("jwt"));
     cb();
   },
   isAuthenticated() {
