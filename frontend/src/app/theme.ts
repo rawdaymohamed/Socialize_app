@@ -1,7 +1,6 @@
 "use client";
 import { Roboto } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
-import { green, pink, purple } from "@mui/material/colors";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -11,7 +10,7 @@ const roboto = Roboto({
 
 const theme = createTheme({
   typography: {
-    fontFamily: roboto.style.fontFamily,
+    fontFamily: "Roboto, sans-serif",
   },
   palette: {
     mode: "dark",
